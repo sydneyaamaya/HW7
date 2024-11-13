@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   SYDNEY AMAYA / SECTION 001
  *
  *   This java file contains the problem solutions for the methods selectionSort,
  *   mergeSortDivisibleByKFirst, asteroidsDestroyed, and numRescueCanoes methods.
@@ -153,10 +153,28 @@ public class ProblemSolutions {
      */
 
     public static boolean asteroidsDestroyed(int mass, int[] asteroids) {
-
-        // YOUR CODE GOES HERE, CONSIDER USING ARRAYS.SORT()
-
-        return false;
+        /**
+         * if the mass of the asteroid plus the sum of all the asteroids excluding the largest 
+         * asteroid is greater than the mass of the largest asteroid return true otherwise
+         * return false
+         */
+        //sort asteroids in ascending order
+        Arrays.sort(asteroids);
+        int sum = 0;
+        boolean destroyed = false;
+        //if asteroids has no elements the mass is automitcally greater so return true
+        if (asteroids.length == 0){
+            return true;
+        }
+        //add together all the elements excluding the last element which is the greatest asteroid
+        for (int i = 0; i < asteroids.length - 1; i++){
+            sum = sum + asteroids[i];
+        }
+        //see if mass + sum is greater than the mass of the largest asteroid
+        if (mass + sum > asteroids[asteroids.length - 1]){
+            destroyed = true;
+        }
+        return destroyed;
 
     }
 
