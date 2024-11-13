@@ -33,17 +33,22 @@ public class ProblemSolutions {
     }
 
     public static void selectionSort(int[] values, boolean ascending ) {
-
         int n = values.length;
-
+        int min = 0;
+        int temp = 0;
+        int temp2 = 0;
+        //descending order
         for (int i = 0; i < n - 1; i++) {
-
-            // YOU CODE GOES HERE -- COMPLETE THE INNER LOOP OF THIS
-            // "SELECTION SORT" ALGORITHM.
-            // DO NOT FORGET TO ADD YOUR NAME / SECTION ABOVE
-
-        }
-
+                min = i;
+                for (int j = i + 1; j < n - 1; j++){
+                    if (values[j] < values[min]){
+                    min = j;
+                }
+                    temp = values[min];
+                    values[min] = values[j];
+                    values[j] = temp;  
+                }
+            }
     } // End class selectionSort
 
 
@@ -209,11 +214,25 @@ public class ProblemSolutions {
      */
 
     public static int numRescueSleds(int[] people, int limit) {
-
-        // YOUR CODE GOES HERE, CONSIDER USING ARRAYS.SORT
-
-        return -1;
-
+        /**
+         * sort people using arrays.sort to get people in ascending order
+         * use a for loop to add every two elements and if the sum is less than 
+         * limit add one sled if it more than limit add two sleds
+         */
+        int sleds = 0;
+        if (people.length == 0){
+            return 0;
+        }
+        Arrays.sort(people);
+        for (int i = 0; i < people.length / 2; i++){
+            if (people[i] + people[i + 1] <= limit){
+                sleds++;
+            }
+            else {
+                sleds = sleds + 2; 
+            }
+        }
+        return sleds;
     }
 
 } // End Class ProblemSolutions
