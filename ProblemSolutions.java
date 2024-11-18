@@ -34,22 +34,33 @@ public class ProblemSolutions {
 
     public static void selectionSort(int[] values, boolean ascending ) {
         int n = values.length;
-        int min = 0;
-        int temp = 0;
-        int temp2 = 0;
-        //descending order
+        //ascending order
         for (int i = 0; i < n - 1; i++) {
-                min = i;
-                for (int j = i + 1; j < n - 1; j++){
-                    if (values[j] < values[min]){
+                int min = i;
+                for (int j = i + 1; j < n; j++){
+                if (values[j] < values[min]){
                     min = j;
                 }
-                    temp = values[min];
-                    values[min] = values[j];
-                    values[j] = temp;  
-                }
             }
-    } // End class selectionSort
+            if (min != i){
+                //swap values[min] and values[j]
+                int temp = values[i];
+                values[i] = values[min];
+                values[min] = temp;
+            }
+        }
+        //descending order
+        /**
+         * swap each index with opposite index (length - i -1 )
+         */
+        if (ascending == false){
+        for (int i = 0; i < n / 2; i++){
+            int temp2 = values[i];
+            values[i] = values[(n- i) - 1];
+            values[(n- i) - 1] = temp2;
+        }
+    }
+    } 
 
 
     /**
@@ -95,20 +106,59 @@ public class ProblemSolutions {
      * The merging portion of the merge sort, divisible by k first
      */
 
-    private void mergeDivisbleByKFirst(int arr[], int k, int left, int mid, int right)
-    {
-        // YOUR CODE GOES HERE, THIS METHOD IS NO MORE THAN THE STANDARD MERGE PORTION
-        // OF A MERGESORT, EXCEPT THE NUMBERS DIVISIBLE BY K MUST GO FIRST WITHIN THE
-        // SEQUENCE PER THE DISCUSSION IN THE PROLOGUE ABOVE.
-        //
-        // NOTE: YOU CAN PROGRAM THIS WITH A SPACE COMPLEXITY OF O(1) OR O(N LOG N).
-        // AGAIN, THIS IS REFERRING TO SPACE COMPLEXITY. O(1) IS IN-PLACE, O(N LOG N)
-        // ALLOCATES AUXILIARY DATA STRUCTURES (TEMPORARY ARRAYS). IT WILL BE EASIER
-        // TO CODE WITH A SPACE COMPLEXITY OF O(N LOG N), WHICH IS FINE FOR PURPOSES
-        // OF THIS PROGRAMMING EXERCISES.
-
-        return;
-
+    private void mergeDivisbleByKFirst(int arr[], int k, int left, int mid, int right){
+        /**
+         * merge and use an if statement to see if each element is divisible by k
+         * and if it is add to the front of the array
+         */
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+        int [] leftArray = new int [n1];
+        int [] rightArray = new int [n2];
+        
+        for (int i = 0; i < n1; i++){
+            leftArray[i] = arr[left + i];
+        }
+        for (int j = 0; j < n2; j++){
+                rightArray[j] = arr[mid + 1 + j];
+        }
+        
+        int i = 0; 
+        int j = 0;
+        int kIndex = left;
+        while (i < n1 && j < n2){
+            boolean leftDivisible = leftArray[i] % k == 0;
+            boolean rightDivisible = rightArray[j] % k == 0;
+            if (leftDivisible && rightDivisible){
+                if (leftArray[i] <= rightArray[j]){
+                    arr[kIndex++] = leftArray[i++];
+                }
+                else {
+                    arr[kIndex++] = rightArray[j++];
+                }
+            }
+            else if (leftDivisible){
+                arr[kIndex++] = leftArray[i++];
+            }
+            else if (rightDivisible){
+                arr[kIndex++] = rightArray[j++];
+            }
+            else{
+                if (leftArray[i] <= rightArray[j]){
+                    arr[kIndex++] = leftArray[i++];
+                }
+                else {
+                    arr[kIndex++] = rightArray[j++];
+                }
+            }
+        }
+        while ( i < n1){
+            arr[kIndex++] = leftArray[i++];
+        }
+        while(j < n2){
+            arr[kIndex++] = rightArray[j++];
+        }
+        
     }
 
 
