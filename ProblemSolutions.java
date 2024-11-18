@@ -125,9 +125,15 @@ public class ProblemSolutions {
         int i = 0;
         int j = 0;
         int kIndex = left;
-        //check if element is divisible by k and place in front
+        //sort elements in ascending order
         while ( i < n1 && j <n2){
-            if(leftArray[i] <= rightArray[j]){
+            if (leftArray[i] % k == 0){
+                arr[kIndex++] = leftArray[i++];
+            }
+            else if (rightArray[j] % k ==0){
+                arr[kIndex++] = rightArray[j++];
+            }
+            else if(leftArray[i] <= rightArray[j] && leftArray[i] % k != 0 ){
                 arr[kIndex++] = leftArray[i++];
             }
             else {
