@@ -125,17 +125,23 @@ public class ProblemSolutions {
         int i = 0;
         int j = 0;
         int kIndex = left;
-        //sort elements in ascending order
+        //sort array in ascending order and add elements divisible by k to the front
         while ( i < n1 && j <n2){
+            //see if element from leftArrayis divisible by k and add to front of arry if it is
             if (leftArray[i] % k == 0){
                 arr[kIndex++] = leftArray[i++];
             }
+            //see if element from rightArray is divisible by k and add to front if it is
             else if (rightArray[j] % k ==0){
                 arr[kIndex++] = rightArray[j++];
             }
+            //if the element i from left array is less than element j from the right array 
+            //and element i is not divisible by k add element i before element j
             else if(leftArray[i] <= rightArray[j] && leftArray[i] % k != 0 ){
                 arr[kIndex++] = leftArray[i++];
             }
+            //if none of the before cases are true then element add the element from rightArray 
+            //before the element from leftArray
             else {
                 arr[kIndex++] = rightArray[j++];
             }
