@@ -54,12 +54,12 @@ public class ProblemSolutions {
          * swap each index with opposite index (length - i -1 )
          */
         if (ascending == false){
-        for (int i = 0; i < n / 2; i++){
-            int temp2 = values[i];
-            values[i] = values[(n- i) - 1];
-            values[(n- i) - 1] = temp2;
-        }
-    }
+            for (int i = 0; i < n / 2; i++){
+               int temp2 = values[i];
+               values[i] = values[(n- i) - 1];
+               values[(n- i) - 1] = temp2;
+            }
+         }
     } 
 
 
@@ -115,51 +115,32 @@ public class ProblemSolutions {
         int n2 = right - mid;
         int [] leftArray = new int [n1];
         int [] rightArray = new int [n2];
-        
-        for (int i = 0; i < n1; i++){
+        for (int i = 0; i  < n1; i++){
             leftArray[i] = arr[left + i];
         }
         for (int j = 0; j < n2; j++){
-                rightArray[j] = arr[mid + 1 + j];
+            rightArray[j] = arr[mid + 1 + j];
         }
-        
-        int i = 0; 
+
+        int i = 0;
         int j = 0;
         int kIndex = left;
-        while (i < n1 && j < n2){
-            boolean leftDivisible = leftArray[i] % k == 0;
-            boolean rightDivisible = rightArray[j] % k == 0;
-            if (leftDivisible && rightDivisible){
-                if (leftArray[i] <= rightArray[j]){
-                    arr[kIndex++] = leftArray[i++];
-                }
-                else {
-                    arr[kIndex++] = rightArray[j++];
-                }
-            }
-            else if (leftDivisible){
+        //check if element is divisible by k and place in front
+        while ( i < n1 && j <n2){
+            if(leftArray[i] <= rightArray[j]){
                 arr[kIndex++] = leftArray[i++];
             }
-            else if (rightDivisible){
+            else {
                 arr[kIndex++] = rightArray[j++];
             }
-            else{
-                if (leftArray[i] <= rightArray[j]){
-                    arr[kIndex++] = leftArray[i++];
-                }
-                else {
-                    arr[kIndex++] = rightArray[j++];
-                }
-            }
         }
-        while ( i < n1){
+        while (i < n1){
             arr[kIndex++] = leftArray[i++];
         }
-        while(j < n2){
+        while (j < n2){
             arr[kIndex++] = rightArray[j++];
         }
-        
-    }
+}
 
 
     /**
